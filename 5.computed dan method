@@ -1,0 +1,30 @@
+Property computed di Vue.js digunakan untuk membuat properti yang dihitung (computed properties). Computed properties memungkinkan kakak untuk melakukan perhitungan atau transformasi data secara dinamis berdasarkan properti lain di dalam komponen Vue, dan hasilnya akan diperbarui secara otomatis saat properti yang digunakan berubah.
+
+Penggunaan property computed berguna dalam beberapa situasi:
+
+Kalkulasi Nilai: Kakak dapat menggunakan computed properties untuk menghitung nilai berdasarkan nilai-nilai lain di dalam komponen Vue. Misalnya, kakak dapat menghitung total harga berdasarkan harga satuan dan jumlah barang, atau menghitung proporsi persentase berdasarkan dua nilai yang ada.
+
+Caching: Computed properties di-cache oleh Vue dan hanya dihitung ulang jika salah satu dari properti yang digunakan berubah. Jadi, jika kakak memiliki komputasi yang mahal atau memerlukan akses ke sumber eksternal, computed properties dapat membantu meningkatkan performa dengan menghindari perhitungan yang tidak perlu.
+
+Mengorganisir Kode: Ketika kakak memiliki logika yang lebih kompleks atau perhitungan yang terkait erat, computed properties dapat membantu mengorganisir kode kakak dengan lebih baik. Alih-alih memiliki logika yang berceceran di dalam metode-metode, kakak dapat menggunakan computed properties untuk memisahkan dan mengelompokkan logika yang berkaitan dengan properti tertentu.
+
+Sementara itu, property methods digunakan untuk mendefinisikan metode-metode yang akan digunakan dalam komponen Vue. Metode-metode ini dapat mengandung logika yang lebih kompleks, melakukan aksi-aksi tertentu, atau menangani event-event yang terjadi.
+
+Perbedaannya dengan computed properties adalah bahwa metode-metode tidak memiliki cache dan tidak otomatis diperbarui saat terjadi perubahan pada properti lainnya. Kakak perlu secara manual memanggil metode jika ingin melakukan perhitungan atau aksi tertentu.
+
+
+
+
+
+
+
+Jadi, dalam kesimpulannya, 
+computed properties biasanya digunakan untuk melakukan perhitungan dinamis dan perubahan secara real-time berdasarkan properti lainnya, 
+sementara method digunakan untuk menyimpan fungsi-fungsi yang akan dipanggil secara eksplisit untuk melakukan tindakan tertentu seperti itu kak :D
+
+
+Computed menyimpan chache sedangkan method tidak.
+
+Jadi bila dalam sebuah view muncul 100 variable yg sama, 
+
+computed hanya menjalankan fungsi 1x saja (selama tidak ada perubahan), sedangkan methods akan menjalankan fungsi tersebut 100x

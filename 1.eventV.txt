@@ -1,0 +1,46 @@
+ var dataProduct={  //Merupakan variabel
+    
+    product:[ //Data Array Json
+       
+        {
+        
+        "image" :"https://i.postimg.cc/Y0qbSDmm/360-F-296459409-jb3y-LASZoal-AMCUs-Rq-S9a3i2sa-UId-Bp-D.jpg",
+        "namaProduct" : "Pensil",
+        "merek" : "Faber",
+        "stok" : "999",
+        "harga" : "1000"
+
+
+        },
+        {
+        
+            "image" :"https://i.postimg.cc/DyNpQYyP/erz205.jpg",
+            "namaProduct" : "Penghapus",
+            "merek" : "Faber",
+            "stok" : "999",
+            "harga" : "1000"
+    
+    
+        }
+
+    
+    ]
+ }
+
+var apps3 = new Vue({   //deklarasi variabel untuk menampung nilai diatas
+    el:'#app3',         //elemen yang akan dijadikan penampung data yaitu id app3 pada file index
+    data: dataProduct   //data yang akan ditransfer ke dalam elemen
+})
+
+untuk menambahakan script HTML dan langsung merubah UI secara langsung bisa pake v-html
+untuk membuat sebuah properti tidak terpengaruh efek apapun bisa pakai v-once
+untuk perulangan bisa make v-for
+untuk pengkondisian bisa pake v-if 
+untuk mengisi sebuah inputan secara otomatis mengikuti data yang sudah ditentukan bisa pake v-model
+
+
+
+saat sudah mendeklarasikan properti seperti contoh dibawah ini, pastikan memanggil semua data menggunakan properti items, jangan sampe typo, karena salah penulisan bakal buat data 
+ga ke render
+
+v-for="items in product"

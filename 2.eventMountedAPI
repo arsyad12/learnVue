@@ -1,0 +1,21 @@
+CONTOH FETCH API MENGGUNAKAN EVEN MOUNTED
+
+var app4 = new Vue({
+    
+    el: '#app4',
+    data:{
+        maximum:50, //Opsional, kalo mau filter data sesuai number
+        newProduct: null
+        
+    },
+
+    mounted: function() { //pastikan menggunakan funtion biasa, karena event this gabisa dipake kalo pake arrow function
+
+        fetch('https://hplussport.com/api/products/order/price') //mengambil data dari API
+
+        .then(response=>response.json()) // Merubah data menjadi json
+
+        .then(data => { this.newProduct = data }) //memasukan data kedalam properti newProduct
+    }
+
+})

@@ -1,0 +1,61 @@
+Cara Pertama
+
+v-on:click / @click
+
+Buat properti chart untuk nampung data dari item di app.js
+
+    cart : [] //sengaja kosong untuk menampung nilai dari v-on:click di index
+
+
+buat button untuk push data item ke chart 
+
+    <a class="btn btn-primary" v-on:click="cart.push(item)">Add to Chart</a>
+
+
+
+buat badage atau navigasi sesuai kebutuhan untuk nampililin jumlah data yang ada di chart
+
+  <!--Cara mengambil menampilkan jumlah data dari prperti chart  -->
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+                <button type="button" class="btn btn-primary">
+                    Your Chart <span class="badge text-bg-danger">{{cart.length}}</span>
+                </button>
+            </div>
+          </nav>
+
+
+
+
+
+Cara kedua 
+
+Bisa buat function addItem di app.js pake method 
+
+
+    methods: {
+        
+        addItem:function(produk) {
+            
+            this.cart.push(produk)
+        }
+    },
+
+
+buat button untuk push data item ke chart 
+
+    <a class="btn btn-primary" v-on:click="addItem">Add to Chart</a>
+
+
+
+buat badage atau navigasi sesuai kebutuhan untuk nampililin jumlah data yang ada di chart
+
+  <!--Cara mengambil menampilkan jumlah data dari prperti chart  -->
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+                <button type="button" class="btn btn-primary">
+                    Your Chart <span class="badge text-bg-danger">{{cart.length}}</span>
+                </button>
+            </div>
+          </nav>
+

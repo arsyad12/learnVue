@@ -31,19 +31,146 @@
     </div>
 
 
+
+<!--Cara mengambil nilai dari array json product dari dataProduct dan melakukan perulangan style -->
+
 <div class="container">
+    <hr>
     <div class="row d-flex m-4" id="app3">
-                    
-        <div v-for="item in product" class="card" style="width: 18rem;" >
-                <img :src="item.image">
-                <div class="card-body">
-                <h5 class="card-title">{{item.namaProduct}}</h5>
-                <p class="card-text">{{item.merek}}</p>
-                <p class="card-text">{{item.stok}}</p>
-                <h5 class="card-title">Rp.{{item.harga}}</h5>
-                <a href="#" class="btn btn-primary">Buy Now</a>
+        
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Input Max Price</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="number only" v-model="maximum"> <!--Pengkondisian yang ditentukan user pake form pake v-model -->
+          </div>
+
+        <div v-for="items in product" v-if="items.harga <= Number(maximum)" class="card" style="width: 18rem;" > <!--Pengkondisian yang ditentukan sistem gabisa diubah user pake v-if -->
+                <img :src="items.image">
+                    <div class="card-body">
+                    <h5 class="card-title">{{items.namaProduct}}</h5>
+                    <p class="card-text">{{items.merek}}</p>
+                    <p class="card-text">{{items.stok}}</p>
+                    <h5 class="card-title">Rp.{{items.harga}}</h5>
+                    <a href="#" class="btn btn-primary">Buy Now</a>
                 </div>
     </div>
+</div>
+
+
+
+
+<!--Cara mengambil nilai dari API menggunakan event mounted -->
+
+<div class="container text-center mb-4" id="app4" > 
+<hr>
+    <div><h1 class="display-2">SUMMER COLLECTION</h1></div>
+
+    <div class="row" >
+        
+        <div class="d-flex align-items-center">  <!--Cara normal styling dan ambil data dari app.js  -->
+            <label for="customRange1" class="form-label">Max Range</label>
+            <input type="number" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" v-model="maximum">
+            <input type="range" class="custom-range" id="customRange1" min="0" max="100" v-model="maximum">
+        </div>
+
+
+
+        <div class="d-flex align-items-center"> <!--Cara styling dan ambil data dari app.js dengan V-bind  -->
+            <label for="customRange1" :class="style.label">Max Range</label>
+            <input type="number" class="form-control mx-2" placeholder="0" v-model="maximum" :style="{'width':'60px', 'text-align':'center'}">
+            <input type="range" class="custom-range" id="customRange1" min="0" max="100" v-model="maximum">
+        </div>
+
+        <!--Cara mengambil menampilkan jumlah data dari properti chart  -->
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+                <button type="button" class="btn btn-primary">
+                    Your Chart <span class="badge text-bg-danger">{{cart.length}}</span>
+                </button>
+            </div>
+          </nav>
+      
+
+        <div class="col mt-4" v-for="item in newProduct" v-if="item.price <= Number(maximum)">
+        
+                <div class="card" style="width: 18rem; height: 40rem;">
+                    <img :src="item.image" class="card-img-top" alt="...">
+                    
+                    <div class="card-body">
+                       
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <p class="card-text">{{item.description}}</p>
+                    
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{item.price}}</li>
+                    <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem">Add to Chart</a></li>   <!--v-on:click berguna untuk memasukan data dari item ke properti chart yang uda disipain di app.js -->
+                    </ul>
+                </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!--Berbagai event V yang bisa dipake di vue -->
+
+
+<div class="container" id="app5">
+
+    <hr>
+
+    <h3>Text:</h3>
+    <textarea name="" id="" cols="30" rows="10" v-model="name"></textarea> <!--untuk mengisi sebuah inputan secara otomatis mengikuti data yang sudah ditentukan bisa pake v-model -->
+
+    <h3>Bound / binding data :</h3>
+    <span>{{name}}</span>
+
+    <h3>Event v-html :</h3>
+    <span v-html="name">{{name}}</span>  <!--untuk menambahakan script HTML dan langsung merubah UI secara langsung bisa pake v-html -->
+
+    <h3>Event v-once :</h3>
+    <span v-once="name">{{name}}</span>  <!--untuk membuat sebuah properti tidak terpengaruh efek apapun bisa pakai v-once -->
+
+
+</div>
+
+
+<!--Mencoba cara cara binding data -->
+<div class="container mt-4">
+    <hr>
+    <h1>Mencoba Binding data</h1>
+
+    <div class="container" id="app6">
+
+
+        <img :src="products[0].image" alt="" class="img-fluid">
+
+
+    </div>
+
+</div>
+
+
+<!--Properti computed yang menajalankan apps secara realtime dan Properti method yang digunakan untuk function dan dipanggil  -->
+
+<div class="container mb-4" id="app7">
+
+    <hr>
+
+    <div>
+        <h1>Mencoba properti computed untuk menampung fungsi</h1>
+        <h3>Membuat Realtime Slugtize App</h3>
+    </div>
+
+    <input type="text" v-model="slugText">
+
+    <div class="font-weight text-danger">{{slugTize}}</div>
+
+
+
 </div>
 
 
