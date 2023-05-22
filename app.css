@@ -1,0 +1,15 @@
+.fade-enter{      /*Membuat transition masuk dengan opacity muncul dari opacity 0 */
+    opacity: 0;
+}
+
+.fade-enter-active{ /* berguna saat transisi masuk dan keluar */
+    transition: all 1s ease-in-out; 
+}
+
+.fade-leave-to{ /*Membuat transition keluar atau menghilang dengan opacity menghilang dari opacity 0 */
+    opacity: 0;
+}
+
+.fade-leave-active{
+    transition: all 1s ease-in-out;
+}
