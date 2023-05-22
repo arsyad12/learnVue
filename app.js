@@ -134,10 +134,25 @@ var app4 = new Vue({
         
         style : {
 
-            label : ['fw-bold', 'mr-2']
+            label : ['fw-bold', 'mr-2'],
+            inputWidth : 60,
+            sliderStatus : true
+
 
         }
         
+    },
+
+    computed:{
+
+        sliderState : function () {
+            
+            // tanda tanya berguna untuk pengganti if, jika true akan menampilkan slider dengan d-flex, jika false akan bernilai d-none dan slider di hide
+            return this.style.sliderStatus ? 'd-flex' : 'd-none' 
+            
+
+        }
+
     },
 
     mounted: function() { //pastikan menggunakan funtion biasa, karena event this gabisa dipake kalo pake arrow function
