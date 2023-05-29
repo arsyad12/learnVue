@@ -166,12 +166,23 @@ var app4 = new Vue({
 
 
     methods: {
+
         
         addItem:function(produk) {
             
             this.cart.push(produk)
         }
     },
+
+
+    filters :{
+        currencyFormat : function (value) { 
+            return 'Rp. ' + Number.parseFloat(value).toFixed(2) 
+    
+            //nilai data yang diambil, dikembalikan dalam bentuk string RP, dijadikan desimal, dan memiliki 2 digit angka diakhir
+    
+        }
+    }
 
 })
 
