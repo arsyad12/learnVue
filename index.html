@@ -130,30 +130,39 @@
           
 
           <!-- Membuat chart yang bisa memuat/menyimpan data  -->
+          
           <nav class="navbar bg-body-tertiary mt-4">
+            
             <div class="container">
-               
-                <button type="button" class="btn btn-danger dropdown-toggle" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Your Chart <span class="badge text-bg-danger">{{cart.length}}</span>
-                </button>
                 
-                
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownCart">
-
-                    <div v-for="(item, index) in cart" :key="index">
+                <div class="dropdown">
+                   
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Your Chart <span class="badge text-bg-danger">{{cart.length}}</span>
+                    </button>
+                    
+                    
+                    <ul class="dropdown-menu">
+                       
+                        <div v-for="(item, index) in cart" :key="index">
 
                         
-                        <div class="dropdown-item">
-                           
-                            <span class="badge rounded-pill text-bg-primary"></span>
-
-                          <b>{{ item.name }}</b>
-
+                            <div class="dropdown-item text-nowrap">
+                               
+                                <span class="badge rounded-pill text-bg-primary">{{item.qty}}</span>
+    
+                             {{ item.produk.name }}
+    
+                              <b>{{ item.produk.price * item.qty | currencyFormat }}</b>
+    
+    
+                            </div>
+                        
                         </div>
-                    
-                    </div>
-
+                   
+                    </ul>
                 </div>
+                
            
             </div>
          
@@ -166,6 +175,47 @@
 
 
 
+   <!-- Membuat chart yang bisa memuat/menyimpan data dan mentotal semua harga  -->
+   <!-- bagian ini menggunakan computed -->
+
+            
+    <nav class="navbar bg-body-tertiary mt-4">
+            
+        <div class="container">
+            
+            <div class="dropdown">
+               
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Your Chart <span class="badge text-bg-danger">{{cartQty}}</span>
+                    <i class="fa-solid fa-cart-shopping">{{cartTotal | currencyFormat}}</i>
+                </button>
+                
+                
+                <ul class="dropdown-menu">
+                   
+                    <div v-for="(item, index) in cart" :key="index">
+
+                    
+                        <div class="dropdown-item text-nowrap">
+                           
+                            <span class="badge rounded-pill text-bg-primary">{{item.qty}}</span>
+
+                         {{ item.produk.name }}
+
+                          <b>{{ item.produk.price * item.qty | currencyFormat }}</b>
+
+
+                        </div>
+                    
+                    </div>
+               
+                </ul>
+            </div>
+            
+       
+        </div>
+     
+</nav>
 
 
 
@@ -173,14 +223,7 @@
 
 
 
-
-
-
-
-
-
-
-        
+      
         <transition-group class="row" name="custom" tag="div" enter-active-class="animate__animated animate__fadeInDown" leave-active-class="animate__animated animate__slideOutRight">
 
                     <!-- cara membuat transisi untuk sebuah data yang banyak sekaligus yang berasal dari API -->
@@ -214,7 +257,9 @@
 
 
 
-                            <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem">Add to Chart</a></li>   <!--v-on:click berguna untuk memasukan data dari item ke properti chart yang uda disipain di app.js -->
+                            <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem(item)">Add to Chart</a></li>   
+                            <!--v-on:click berguna untuk memasukan data dari item ke properti chart yang uda disipain di app.js -->
+                            <!-- saat menambahkan (item) setelah addItem akan berguna untuk memanggil data nya saat dipanggil dengan item -->
                             </ul>
                         </div>
                     

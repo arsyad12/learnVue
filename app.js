@@ -130,7 +130,8 @@ var app4 = new Vue({
        
         newProduct: null,
        
-        cart : [], //sengaja kosong untuk menampung nilai dari v-on:click di index
+        
+        cart : [],  // kosong untuk menampung nilai dari v-on:click di index
         
         style : {
 
@@ -148,11 +149,36 @@ var app4 = new Vue({
         sliderState : function () {
             
             // tanda tanya berguna untuk pengganti if, jika true akan menampilkan slider dengan d-flex, jika false akan bernilai d-none dan slider di hide
-            return this.style.sliderStatus ? 'd-flex' : 'd-none' 
+            return this.style.sliderStatus ? 'd-flex' : 'd-none'            
+
+        },
+
+        cartTotal : function () { 
+
+            let sum = 0;
+
+            for(key in this.cart){
+
+                sum = sum + (this.cart[key].produk.price * this.cart[key].qty)
+            }
+
+            return sum
+
+         },
+
+         cartQty : function () { 
+
+            let Qty = 0;
+
+            for(key in this.cart){
+
+                Qty = Qty + this.cart[key].qty
+            }
+
+            return Qty
+
+          }
             
-
-        }
-
     },
 
     mounted: function() { //pastikan menggunakan funtion biasa, karena event this gabisa dipake kalo pake arrow function
@@ -170,8 +196,42 @@ var app4 = new Vue({
         
         addItem:function(produk) {
             
-            this.cart.push(produk)
+            // this.cart.push(produk) , berguna untuk push data produk ke cart
+            
+            //variabel untuk mengecek index produk
+            var productIndex; 
+            
+            //function yang berguna untuk mengecek keberadaan produk
+            
+            var productExist = this.cart.filter(function(item,index) {
+
+                if (item.produk.id == Number(produk.id)) {
+                
+                productIndex = index
+                
+                return true
+                
+               } 
+
+               else {
+                
+                return false
+               
+            }
+
+            })
+
+
+            if (productExist.length) {
+               
+                this.cart[productIndex].qty++
+          
+            } else {
+                this.cart.push({produk:produk , qty : 1 })
+             }
+           
         }
+
     },
 
 
