@@ -1,0 +1,17 @@
+
+Vue.component('priceprops',{    //price adalah nama componen WAJIB HURUF KECIL
+
+    data:function () { 
+
+        return{}
+    
+     },
+    
+     props: ['matauang2','value','desimal'], //komponen dengan props, untuk memanggil nilai dari API 
+
+     //props tidak bisa mirip, karena bakal eror
+    
+     template : '<h4>{{this.matauang2+" "+ Number.parseFloat(this.value).toFixed(desimal)}}</h4>' //memanggil komponen kedalam file html
+    
+    
+    })

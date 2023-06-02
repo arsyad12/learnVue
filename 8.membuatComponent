@@ -1,0 +1,22 @@
+//membuat component sederhana, component price 
+
+Vue.component('price',{    //price adalah nama componen
+
+data:function () { 
+
+
+    return{
+
+        mataUang : "Rp", //komponen pertama
+        nilai : 34.50, //kompunen kedua
+        desimal : 2 //komponen ke tiga
+    }
+
+
+ },
+
+
+ template : '<h4>{{this.mataUang +" "+ Number.parseFloat(this.nilai).toFixed(desimal)}}</h4>' //memanggil komponen kedalam file html
+
+
+})

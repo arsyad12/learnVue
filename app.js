@@ -155,27 +155,27 @@ var app4 = new Vue({
 
         cartTotal : function () { 
 
-            let sum = 0;
+            let sum = 0; //total awal cart adalah 0
 
-            for(key in this.cart){
+            for(key in this.cart){ //perulanagan jika nilai array/key di cart
 
-                sum = sum + (this.cart[key].produk.price * this.cart[key].qty)
+                sum = sum + (this.cart[key].produk.price * this.cart[key].qty) //total/sum = total ditambah nilai harga data array/ke di cart dikali nilai kuantitas data array di cart
             }
 
-            return sum
+            return sum //kembalikam hasil perhitungan nilai sum
 
          },
 
          cartQty : function () { 
 
-            let Qty = 0;
+            let Qty = 0; //nilai kuantitas awal adalah 0
 
-            for(key in this.cart){
+            for(key in this.cart){ //perulanagan jika nilai array/key di cart
 
-                Qty = Qty + this.cart[key].qty
+                Qty = Qty + this.cart[key].qty //Qty sama dengan nilai Qty ditambah nilai kuantitas yang ada didalam cart
             }
 
-            return Qty
+            return Qty //kembalikan hasil Qty
 
           }
             
@@ -205,32 +205,42 @@ var app4 = new Vue({
             
             var productExist = this.cart.filter(function(item,index) {
 
-                if (item.produk.id == Number(produk.id)) {
+                if (item.produk.id == Number(produk.id)) { //jika item dari produk id ada dan bernilai sama dengan Number produk id
                 
-                productIndex = index
+                productIndex = index //maka produkIndex sama dengan Index
                 
-                return true
+                return true //kembalikan nilai true
                 
                } 
 
                else {
                 
-                return false
+                return false //jika produk gaada / ga sama kembalikan nilai false
                
             }
 
             })
 
 
-            if (productExist.length) {
+            if (productExist.length) { //jika produk sudah memiliki nilai
                
-                this.cart[productIndex].qty++
+                this.cart[productIndex].qty++  // maka tambah nilai produk 
           
             } else {
-                this.cart.push({produk:produk , qty : 1 })
+                this.cart.push({produk:produk , qty : 1 }) //atau tambahkan produk dan quantity suatu produk
              }
            
-        }
+        },
+
+
+        deleteItem : function (key) {     //key digunakan untuk mendapatkan nilai data berbentuk array
+            if (this.cart[key].qty >1 ) {   //jika isi cart dengan key yang sama bernilai lebih dari 1
+                this.cart[key].qty--        //maka cart harus dikurangin
+            }
+            else {
+                this.cart.splice(key,1) //jika nilai cart sudah sama dengan 1 maka jika tombol di tekan akan di hapus dengan fungsi splice
+            }
+        } 
 
     },
 
@@ -341,3 +351,48 @@ var apps7 = new Vue({
     }
 
 })
+
+
+
+//membuat component sederhana, component price 
+
+Vue.component('price',{    //price adalah nama componen
+
+data:function () { 
+
+
+    return{
+
+        mataUang : "Rp", //komponen pertama
+        nilai : 34.50, //kompunen kedua
+        desimal : 2 //komponen ke tiga
+    }
+
+
+ },
+
+
+ template : '<h4>{{this.mataUang +" "+ Number.parseFloat(this.nilai).toFixed(desimal)}}</h4>' //memanggil komponen kedalam file html
+
+
+})
+
+
+
+
+Vue.component('priceprops',{    //price adalah nama componen WAJIB HURUF KECIL
+
+    data:function () { 
+
+        return{}
+    
+     },
+    
+     props: ['matauang2','value','desimal'], //komponen dengan props, untuk memanggil nilai dari API 
+
+     //props tidak bisa mirip, karena bakal eror
+    
+     template : '<h4>{{this.matauang2+" "+ Number.parseFloat(this.value).toFixed(desimal)}}</h4>' //memanggil komponen kedalam file html
+    
+    
+    })

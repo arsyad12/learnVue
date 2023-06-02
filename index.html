@@ -178,6 +178,10 @@
    <!-- Membuat chart yang bisa memuat/menyimpan data dan mentotal semua harga  -->
    <!-- bagian ini menggunakan computed -->
 
+   <!-- membuat tombol delete dengan method -->
+   <!-- Tombol delete bisa diliat dari function di method
+   tombol delete dengan preventiv tinggal ditambah .stop setelah @click agar tidak merefresh halaman -->
+
             
     <nav class="navbar bg-body-tertiary mt-4">
             
@@ -203,6 +207,10 @@
                          {{ item.produk.name }}
 
                           <b>{{ item.produk.price * item.qty | currencyFormat }}</b>
+
+                          <a class="badge rounded-pill bg-danger text-white" @click="deleteItem(index)">Delete close</a> 
+                          <a class="badge rounded-pill bg-danger text-white" @click.stop="deleteItem(index)">Delete Stay</a> 
+
 
 
                         </div>
@@ -252,9 +260,22 @@
                             kemudian panggil function nya dengan format seperti dibawah ini -->
 
 
-                            <li class="list-group-item">{{item.price | currencyFormat}}</li>
+                            <!-- <li class="list-group-item">{{item.price | currencyFormat}}</li> -->
 
+                            
+                            <!--membuat component menggunakan vue js -->
 
+                            <!-- <price></price> -->
+
+                            <!-- membuat componen dan props untuk memanggil data dari API -->
+
+                            <priceprops 
+                            
+                                :matauang2="'Rp'"
+                                :value="item.price"
+                                :desimal="2"
+                                
+                            ></priceprops>
 
 
                             <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem(item)">Add to Chart</a></li>   
