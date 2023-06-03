@@ -1,0 +1,71 @@
+
+
+
+
+      
+        <transition-group class="row" name="custom" tag="div" enter-active-class="animate__animated animate__fadeInDown" leave-active-class="animate__animated animate__slideOutRight">
+
+                    <!-- cara membuat transisi untuk sebuah data yang banyak sekaligus yang berasal dari API -->
+                    <!-- pertama buat nama transisi dan tag yang akan ditarget kan untuk dibuat transisi -->
+                    <!-- pastikan sudah membuat :key yang memanggil id setiap data yang mau diberi transisi -->
+                    <!-- kemudian panggil transisi animasi dari animate.css didalam enter-active-class untuk transisi masuk -->
+                    <!-- kemudian panggil transisi animasi dari animate.css didalam leave-active-class untuk transisi keluar -->
+
+                <div class="col mt-4"  v-for="item in newProduct" :key="item.id" v-if="item.price <= Number(maximum)">
+
+                        <div class="card" style="width: 18rem; height: 40rem;">
+
+                            <img :src="item.image" class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                            
+                                <h5 class="card-title">{{item.name}}</h5>
+                                <p class="card-text">{{item.description}}</p>
+                            
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                        <!-- 
+                            Memanipulasi data dengan filters vue.js
+                            buat dulu function nya di app.js 
+                            kemudian panggil function nya dengan format seperti dibawah ini -->
+
+
+                            <!-- <li class="list-group-item">{{item.price | currencyFormat}}</li> -->
+
+                            
+                            <!--membuat component menggunakan vue js -->
+
+                            <!-- <price></price> -->
+
+                            <!-- membuat componen dan props untuk memanggil data dari API -->
+
+                            <!-- <priceprops 
+                            
+                                :matauang2="'Rp'"
+                                :value="item.price"
+                                :desimal="2"
+                                
+                            ></priceprops> -->
+
+                            <!-- membuat componen dan props untuk memanggil data dari API dengan menentukan default value-->
+                            <!-- membuat component sederhana dengan props dan nilai default, component price  -->
+
+                            <propsdefault
+
+                            :value="Number(item.price)"
+
+                            ></propsdefault>
+
+
+                            <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem(item)">Add to Chart</a></li>   
+                            <!--v-on:click berguna untuk memasukan data dari item ke properti chart yang uda disipain di app.js -->
+                            <!-- saat menambahkan (item) setelah addItem akan berguna untuk memanggil data nya saat dipanggil dengan item -->
+                            </ul>
+                        </div>
+                    
+                    </div>
+                        
+                </div>
+
+        <transition-group>  

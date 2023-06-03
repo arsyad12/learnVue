@@ -379,6 +379,7 @@ data:function () {
 
 
 
+//membuat component sederhana dengan props, component price 
 
 Vue.component('priceprops',{    //price adalah nama componen WAJIB HURUF KECIL
 
@@ -396,3 +397,91 @@ Vue.component('priceprops',{    //price adalah nama componen WAJIB HURUF KECIL
     
     
     })
+
+
+//membuat component sederhana dengan props dan nilai default, component price 
+
+    
+Vue.component('propsdefault',{    //price adalah nama componen WAJIB HURUF KECIL
+
+    data:function () { 
+
+        return{}
+    
+     },
+    
+     props:{    //rubah props menjadi bentuk object
+
+        matauang3 :{ 
+        type : String,
+        default : 'RP. '
+        
+        },
+
+        value : Number,
+
+        desimal : {
+           type : Number,
+           default : 2
+        }
+
+
+     }, 
+
+     //props tidak bisa mirip, karena bakal eror
+    
+     template : '<h4>{{this.matauang3+" "+ Number.parseFloat(this.value).toFixed(desimal)}}</h4>' //memanggil komponen kedalam file html
+    
+    
+    });
+
+
+
+
+//membuat componen list produk 
+
+Vue.component('produklist',{ 
+
+        
+        props : ['produk','maximum'],
+
+        template: 
+    
+    `
+          
+    <transition-group class="row" name="custom" tag="div" enter-active-class="animate__animated animate__fadeInDown" leave-active-class="animate__animated animate__slideOutRight">
+
+        <div class="col mt-4"  v-for="item in newProduct" :key="item.id" v-if="item.price <= Number(maximum)">
+
+            <div class="card" style="width: 18rem; height: 40rem;">
+
+                <img :src="item.image" class="card-img-top" alt="...">
+                
+                    <div class="card-body">
+                    
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <p class="card-text">{{item.description}}</p>
+                    
+                    </div>
+
+                        <ul class="list-group list-group-flush">
+
+                                <propsdefault
+
+                                :value="Number(item.price)"
+
+                                ></propsdefault>
+
+
+                            <li class="list-group-item"><a class="btn btn-primary">BUY NOW</a> || <a class="btn btn-primary" v-on:click="addItem(item)">Add to Chart</a></li>   
+
+                
+                        </ul>
+                    
+            </div>
+                        
+        </div>
+
+    </transition-group>  
+            `
+})
