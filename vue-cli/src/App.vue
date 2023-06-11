@@ -4,7 +4,7 @@
   <!-- <p class="animate__animated animate__fadeInRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officiis beatae temporibus accusamus aliquid mollitia alias commodi fugit blanditiis nostrum, eum consequatur quidem voluptas esse quaerat ex facilis dolore voluptatibus.</p>
   <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
   <price :value="4.5"></price> -->
-  <product-list :maximum="maximum" :products="products"></product-list>
+  <product-list :maximum="maximum" :products="products" @add="addItem"></product-list>
   </div>
 </template>
 
@@ -22,7 +22,8 @@ export default {
   data : function () {
     return { 
       maximum : 20,
-      products : []
+      products : [],
+      cart :[]
     }
   },
 
@@ -39,8 +40,32 @@ export default {
         .then(data => {
             this.products = data;
         });
+  },
+
+
+  methods: {
+
+addItem: function(product) {
+        let productIndex;
+        let productExist = this.cart.filter(function(item, index) {
+            if (item.product.id == Number(product.id)) {
+                productIndex = index;
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        if (productExist.length) {
+            this.cart[productIndex].qty++
+        } else {
+            this.cart.push({product: product, qty: 1});
+        }
+    }
+
   }
 
 }
+
 </script>
 

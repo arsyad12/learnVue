@@ -40,7 +40,7 @@ import price from "./price.vue"
 
         computed: {
         
-        showItem: function() {
+            showItem: function() {
             let max = this.maximum;
             return this.products.filter(function(item) {
                 return item.price <= max
