@@ -1,20 +1,26 @@
 <template>
   <div id="app" class="container mt-5">
   <h1>ID Shop</h1>
-  <!-- <p class="animate__animated animate__fadeInRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officiis beatae temporibus accusamus aliquid mollitia alias commodi fugit blanditiis nostrum, eum consequatur quidem voluptas esse quaerat ex facilis dolore voluptatibus.</p>
-  <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
-  <price :value="4.5"></price> -->
+  <navbar :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" @toggle="toggleSliderStatus"></navbar>
+  <p class="animate__animated animate__fadeInRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officiis beatae temporibus accusamus aliquid mollitia alias commodi fugit blanditiis nostrum, eum consequatur quidem voluptas esse quaerat ex facilis dolore voluptatibus.</p>
+  <!-- <font-awesome-icon icon="shopping-cart"></font-awesome-icon> -->
+  <!-- <price :value="4.5"></price> -->
+  <price-slider :sliderStatus="sliderStatus" :maximum.sync="maximum"></price-slider>
   <product-list :maximum="maximum" :products="products" @add="addItem"></product-list>
+
   </div>
 </template>
 
 <script>
 
-// import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
 // import price from "./components/price.vue";
 
+import navbar from "./components/navbar.vue";
+
 import ProductList from "./components/ProductList.vue"
+
+import PriceSlider from "./components/PriceSlider.vue";
 
 export default {
   name: 'App',
@@ -23,15 +29,17 @@ export default {
     return { 
       maximum : 20,
       products : [],
-      cart :[]
+      cart :[],
+      sliderStatus : false
     }
   },
 
 
   components: {
-    // FontAwesomeIcon,
     // price
-    ProductList
+    navbar,
+    ProductList,
+    PriceSlider
   },
 
   mounted: function() {
@@ -45,7 +53,7 @@ export default {
 
   methods: {
 
-addItem: function(product) {
+  addItem: function(product) {
         let productIndex;
         let productExist = this.cart.filter(function(item, index) {
             if (item.product.id == Number(product.id)) {
@@ -61,9 +69,30 @@ addItem: function(product) {
         } else {
             this.cart.push({product: product, qty: 1});
         }
+    },
+
+    toggleSliderStatus: function() {
+      this.style.sliderStatus = !this.style.sliderStatus;
     }
 
-  }
+  },
+
+  computed: {
+    cartTotal: function () {
+        let sum = 0;
+        for (let key in this.cart) {
+            sum = sum + (this.cart[key].product.price * this.cart[key].qty);
+        }
+        return sum;
+    },
+    cartQty: function () {
+        let qty = 0;
+        for (let key in this.cart) {
+            qty = qty + this.cart[key].qty;
+        }
+        return qty;
+    }
+  },
 
 }
 
