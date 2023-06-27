@@ -1,12 +1,17 @@
 <template>
   <div id="app" class="container mt-5">
-  <h1>ID Shop</h1>
-  <navbar :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" @toggle="toggleSliderStatus"></navbar>
-  <p class="animate__animated animate__fadeInRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officiis beatae temporibus accusamus aliquid mollitia alias commodi fugit blanditiis nostrum, eum consequatur quidem voluptas esse quaerat ex facilis dolore voluptatibus.</p>
-  <!-- <font-awesome-icon icon="shopping-cart"></font-awesome-icon> -->
-  <!-- <price :value="4.5"></price> -->
-  <price-slider :sliderStatus="sliderStatus" :maximum.sync="maximum"></price-slider>
-  <product-list :maximum="maximum" :products="products" @add="addItem"></product-list>
+
+    <router-view
+      :cart="cart" 
+      :cartQty="cartQty" 
+      :cartTotal="cartTotal" 
+      :sliderStatus="style.sliderStatus" 
+      :maximum.sync="maximum"
+      :products="products" 
+      @toggle="toggleSliderStatus" 
+      @delete="deleteItem"
+      @add="addItem"
+    ></router-view>
 
   </div>
 </template>
@@ -14,33 +19,22 @@
 <script>
 
 
-// import price from "./components/price.vue";
-
-import navbar from "./components/navbar.vue";
-
-import ProductList from "./components/ProductList.vue"
-
-import PriceSlider from "./components/PriceSlider.vue";
-
 export default {
   name: 'App',
 
   data : function () {
-    return { 
-      maximum : 20,
-      products : [],
-      cart :[],
-      sliderStatus : false
+    return {
+      maximum: 50,
+      products: [],
+      cart: [],
+      style: {
+        sliderStatus: false
+      },
     }
   },
 
 
-  components: {
-    // price
-    navbar,
-    ProductList,
-    PriceSlider
-  },
+
 
   mounted: function() {
     fetch('https://hplussport.com/api/products/order/price')
@@ -71,11 +65,21 @@ export default {
         }
     },
 
-    toggleSliderStatus: function() {
-      this.style.sliderStatus = !this.style.sliderStatus;
-    }
 
-  },
+  toggleSliderStatus: function() {
+  
+  this.style.sliderStatus = !this.style.sliderStatus;
+  
+},
+
+deleteItem: function(id) {
+      if(this.cart[id].qty > 1) {
+          this.cart[id].qty--;
+      } else {
+          this.cart.splice(id, 1);
+      }
+    }
+},
 
   computed: {
     cartTotal: function () {
