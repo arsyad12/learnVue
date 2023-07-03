@@ -22,7 +22,9 @@
                             <b>{{ item.qty * item.product.price | currencyFormat }}</b>
                             <a href="#" class="badge badge-danger text-white" @click.stop="$emit('delete', index)">-</a>
                         </div>
+                        
                     </div>
+                    <router-link class="btn btn-sm btn-outline-info text-dark float-right mr-2" to="/checkout">Ceheckout</router-link>
                 </div>
             </div>
         </div>
